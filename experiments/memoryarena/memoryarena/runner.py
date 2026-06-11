@@ -55,7 +55,7 @@ def _oracle_dry_agent_artifact(task, condition: str, include_constraints: bool) 
 
 
 def _pt_skill_dir() -> Path:
-    return Path.home() / ".claude" / "skills" / "preference-tracker"
+    return Path.home() / ".claude" / "skills" / "tellonce"
 
 
 def _trace_workspace_settings_payload(
@@ -93,7 +93,7 @@ def _write_trace_workspace_settings(
 def _write_trace_heartbeat_hook(workspace: Path) -> Path:
     """Mirror ClawArena's per-workspace heartbeat hook so retrieve hook
     delta can be observed even when memory-retrieve-inject.sh is absent
-    (e.g. unit tests on hosts that don't ship preference-tracker)."""
+    (e.g. unit tests on hosts that don't ship tellonce)."""
     script = (workspace / ".claude" / "trace_heartbeat.py").resolve()
     script.parent.mkdir(parents=True, exist_ok=True)
     script.write_text(
@@ -183,7 +183,7 @@ class _MemoryArenaTraceState:
     Mirrors the design of ClawArena's TraceNativeCcCondition /
     TraceNativeCodexCondition: per (profile, condition) we allocate
     isolated B5_MEMORY_DIR / B5_STATE_DIR / B5_OBS_LOG_DIR. Phase A
-    add_correction writes a real preference-tracker memory .md so the
+    add_correction writes a real tellonce memory .md so the
     next round's UPS retrieve hook surfaces it. Phase B sets _frozen=True
     so add_correction is a no-op (proves the eval split was frozen).
     """
@@ -315,7 +315,7 @@ class _MemoryArenaTraceState:
         """CC: drop workspace .claude/settings.json registering the
         non-blocking TRACE hook subset (UPS retrieve + Stop pending-promote)
         and the heartbeat hook so we can observe hook firings even on
-        hosts without preference-tracker installed.
+        hosts without tellonce installed.
 
         Codex: returns None — codex reads ~/.codex/hooks.json globally.
         """

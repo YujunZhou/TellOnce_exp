@@ -568,7 +568,7 @@ def call_codex_cli(
     # 2026-05-03 codex review fix (BLOCK): trace_native_codex now uses an
     # isolated CODEX_HOME with custom heartbeat-only hooks.json instead of
     # user CODEX_HOME, to prevent the global retrieve-inject hook from
-    # leaking ~/.codex/skills/preference-tracker fingerprints + memory.
+    # leaking ~/.codex/skills/tellonce fingerprints + memory.
     codex_home: Path | None = None
     if preserve_user_config:
         codex_home = _prepare_trace_codex_home()
@@ -687,7 +687,7 @@ def _prepare_trace_codex_home() -> Path:
     2026-05-03 codex review fix: trace_native_codex previously kept user
     CODEX_HOME so PT hooks could fire, but `~/.codex/hooks.json` registers
     `userpromptsubmit-retrieve-inject.sh` which loads
-    `~/.codex/skills/preference-tracker/shared_lib/fingerprints.yaml`
+    `~/.codex/skills/tellonce/shared_lib/fingerprints.yaml`
     leaking ~19 external rules into every turn regardless of B5_MEMORY_DIR.
     Mirrors claude-side Fix 3. Runner injects memory_text via prompt body.
     """

@@ -387,7 +387,7 @@ def _run_one_round(
         update_ids=round_obj.update_ids,
     )
     # M2: TRACE-native-CC condition writes per-workspace .claude/settings.json
-    # registering preference-tracker hooks. claude CLI then loads them via
+    # registering tellonce hooks. claude CLI then loads them via
     # --settings flag (see runtimes._call_claude_cli).
     if hasattr(condition, "setup_workspace"):
         try:

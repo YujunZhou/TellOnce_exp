@@ -22,7 +22,7 @@ exceeding the strongest memory baseline on task pass.
 ## ⚠️ Prerequisite: install the TRACE skill first
 
 The method itself ships as a separate, deployable skill —
-[**YujunZhou/preference-tracker**](https://github.com/YujunZhou/preference-tracker)
+[**YujunZhou/tellonce**](https://github.com/YujunZhou/tellonce)
 — which runs on Claude Code, GitHub Copilot CLI, and Codex. The
 `trace_native_*` experiment conditions in this repository **require that skill
 to be installed** (the harness wires its hooks into each per-run isolated
@@ -30,12 +30,12 @@ workspace):
 
 ```bash
 # Claude Code (used by trace_native_cc)
-git clone https://github.com/YujunZhou/preference-tracker.git ~/.claude/skills/preference-tracker
-cd /path/to/any/project && bash ~/.claude/skills/preference-tracker/install.sh
+git clone https://github.com/YujunZhou/tellonce.git ~/.claude/skills/tellonce
+cd /path/to/any/project && bash ~/.claude/skills/tellonce/install.sh
 
 # Codex CLI (used by trace_native_codex)
-git clone https://github.com/YujunZhou/preference-tracker.git ~/.codex/skills/preference-tracker
-bash ~/.codex/skills/preference-tracker/codex/install.sh
+git clone https://github.com/YujunZhou/tellonce.git ~/.codex/skills/tellonce
+bash ~/.codex/skills/tellonce/codex/install.sh
 ```
 
 The baseline conditions (`no_memory`, `compiled_enforcement`) run without the

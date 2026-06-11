@@ -127,8 +127,8 @@ def build_condition(name: str, profile: dict[str, Any]) -> ConditionState:
 # TRACE-native-CC condition (gap-review M1 + M2 + M3 + M4, 2026-05-02)
 # ---------------------------------------------------------------------------
 
-# Hooks we expect preference-tracker to register, all under
-# ~/.claude/skills/preference-tracker/hooks/. Keep in sync with
+# Hooks we expect tellonce to register, all under
+# ~/.claude/skills/tellonce/hooks/. Keep in sync with
 # lib/_install_merge_settings.py PT_HOOKS dict.
 _PT_HOOKS = {
     "Stop": [
@@ -159,7 +159,7 @@ _PT_HOOKS = {
 # job (verify_compliance equivalent runs in score_response/overlay), not
 # the inner Claude session's hook chain.
 # 2026-05-03 fix (B5_MEMORY_DIR isolation): user-global
-# memory-retrieve-inject.sh ALSO loads ~/.claude/skills/preference-tracker/
+# memory-retrieve-inject.sh ALSO loads ~/.claude/skills/tellonce/
 # lib/fingerprints.yaml and the user's personal memory dir, leaking ~19
 # external rules into the experiment regardless of B5_MEMORY_DIR. Drop it.
 # Runner builds memory_text from condition.memory_notes() (which reads
@@ -175,14 +175,14 @@ _PT_HOOKS_TRACE = {
 
 
 def _pt_skill_dir() -> Path:
-    return Path.home() / ".claude" / "skills" / "preference-tracker"
+    return Path.home() / ".claude" / "skills" / "tellonce"
 
 
 def workspace_settings_payload(
     skill_dir: Path | None = None,
     hooks: dict[str, list[tuple[str, int]]] | None = None,
 ) -> dict[str, Any]:
-    """Build the .claude/settings.json contents that load preference-tracker
+    """Build the .claude/settings.json contents that load tellonce
     hooks. Default `hooks` is the non-blocking TRACE subset (`_PT_HOOKS_TRACE`):
     only UPS retrieve + Stop pending-promote. Pass `hooks=_PT_HOOKS` for the
     full chain when blocking is acceptable."""
@@ -218,12 +218,12 @@ def write_workspace_settings(
 
 
 def memory_state_hash(memory_dir: Path | None = None) -> str:
-    """Hash a preference-tracker memory directory contents so we can prove
+    """Hash a tellonce memory directory contents so we can prove
     the eval split was frozen (hash before == hash after).
 
     TRACE_NATIVE_CC_PATCH_REVIEW C2 fix: when memory_dir is None, prefer the
     explicit B5_MEMORY_DIR env (the per-run isolated dir we set on the inner
-    claude subprocess), then ~/.preference-tracker.config.json memory_dir
+    claude subprocess), then ~/.tellonce.config.json memory_dir
     (matches what hooks see), then cwd-derived fallback last. Without this
     we used to hash a path that didn't exist while hooks wrote elsewhere.
     """
@@ -232,7 +232,7 @@ def memory_state_hash(memory_dir: Path | None = None) -> str:
         if env_dir:
             memory_dir = Path(env_dir)
         else:
-            cfg_path = Path.home() / ".preference-tracker.config.json"
+            cfg_path = Path.home() / ".tellonce.config.json"
             try:
                 cfg_memory = json.loads(cfg_path.read_text())["memory_dir"]
                 memory_dir = Path(cfg_memory)
@@ -305,7 +305,7 @@ def count_obs_log_events(
 
 class TraceNativeCcCondition(CompiledEnforcementCondition):
     """TRACE-native condition where retrieval, correction, and memory write
-    all happen via real preference-tracker runtime hooks plus per-run
+    all happen via real tellonce runtime hooks plus per-run
     isolated memory/state/obs_log dirs.
 
     Round-7b (TRACE_NATIVE_CC_PATCH_REVIEW 2026-05-02 fixes):
@@ -540,7 +540,7 @@ class TraceNativeCcCondition(CompiledEnforcementCondition):
             return
         if not self._memory_dir:
             return
-        # Round-7b C1 fix: actually write a real preference-tracker memory
+        # Round-7b C1 fix: actually write a real tellonce memory
         # entry (markdown with frontmatter) under the per-run B5_MEMORY_DIR.
         # The next round's memory-retrieve-inject.sh hook will see it via
         # the standard _build_index() scan.
@@ -591,7 +591,7 @@ class TraceNativeCcCondition(CompiledEnforcementCondition):
           no_memory because train-phase memory was never re-read in eval.
         - Round 4 #2 (frontmatter pollution): strip YAML frontmatter (`---\n
           ... \n---\n`) from each markdown body so the agent sees clean
-          actionable text, not internal preference-tracker metadata. Matches
+          actionable text, not internal tellonce metadata. Matches
           MemoryArena's `_MemoryArenaTraceState.retrieve()` behavior so cross-
           dataset prompts are consistent.
         """

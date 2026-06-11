@@ -34,9 +34,9 @@ experiments/
 
 ## Prerequisites
 
-1. **Skill install** (for `trace_native_*`): install the preference-tracker skill
-   at `~/.claude/skills/preference-tracker` — see
-   [YujunZhou/preference-tracker](https://github.com/YujunZhou/preference-tracker). The
+1. **Skill install** (for `trace_native_*`): install the Tellonce skill
+   at `~/.claude/skills/tellonce` — see
+   [YujunZhou/tellonce](https://github.com/YujunZhou/tellonce). The
    harness wires the skill's hooks into each per-run isolated workspace.
 2. **Benchmark data**: not redistributed. See
    `clawarena/data/README.md` (ClawArena) and

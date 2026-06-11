@@ -13,8 +13,8 @@
 #     model     : haiku | sonnet (claude_cli); gpt-5.4-mini | gpt-5.5 (codex_cli)
 #
 # Prerequisites:
-#   - For trace_native_*: install the preference-tracker skill at
-#     ~/.claude/skills/preference-tracker (see https://github.com/YujunZhou/preference-tracker).
+#   - For trace_native_*: install the Tellonce skill at
+#     ~/.claude/skills/tellonce (see https://github.com/YujunZhou/tellonce).
 #   - Regenerate the MemoryArena row splits under data/splits/
 #     (see ../data/splits/README.md).
 set -euo pipefail

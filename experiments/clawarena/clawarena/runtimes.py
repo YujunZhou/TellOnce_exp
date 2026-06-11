@@ -63,7 +63,7 @@ def call_runtime(
     if runtime == "codex_cli_trace":
         # TRACE-native variant for trace_native_codex experiments.
         # Drops --ignore-user-config / --ignore-rules so codex loads
-        # ~/.codex/hooks.json + ~/.codex/config.toml (preference-tracker
+        # ~/.codex/hooks.json + ~/.codex/config.toml (tellonce
         # skill registration). Empirically codex 0.128.0 loads hooks.json
         # even with --ignore-user-config, but this variant removes the
         # ambiguity so the TRACE-native condition's runtime registration
@@ -184,7 +184,7 @@ def _call_codex_cli(
     # still loads hooks.json from CODEX_HOME even with --ignore-user-config,
     # so clean baselines must not inherit the user's real ~/.codex directory.
     # The TRACE-native variant (preserve_user_config=True, runtime
-    # "codex_cli_trace") keeps the user's CODEX_HOME so preference-tracker
+    # "codex_cli_trace") keeps the user's CODEX_HOME so tellonce
     # hooks can fire by design.
     cmd = [
         "codex",
@@ -208,7 +208,7 @@ def _call_codex_cli(
     ]
     started = time.time()
     # codex_cli_trace intentionally preserves the user's hook configuration.
-    # Do not prepend .eval_bin in that mode: the preference-tracker hook reads
+    # Do not prepend .eval_bin in that mode: the tellonce hook reads
     # its JSON stdin with `cat`, and our output-limited cat wrapper truncates
     # large ClawArena prompts before the hook can parse them.
     codex_env = _runtime_env(None if preserve_user_config else cwd / ".eval_bin")
@@ -217,7 +217,7 @@ def _call_codex_cli(
     # 2026-05-03 codex review fix (BLOCK): even trace_native_codex now uses
     # an isolated CODEX_HOME — but with a custom hooks.json registering ONLY
     # a heartbeat hook. This stops the user's global retrieve-inject hook
-    # from leaking ~/.codex/skills/preference-tracker fingerprints + memory.
+    # from leaking ~/.codex/skills/tellonce fingerprints + memory.
     isolated_codex_home: Path | None = None
     if preserve_user_config:
         isolated_codex_home = _prepare_trace_codex_home()
@@ -461,9 +461,9 @@ def _prepare_trace_codex_home() -> Path:
     """Create a TRACE-isolated CODEX_HOME with auth + heartbeat-only hooks.
 
     2026-05-03 codex review fix (BLOCK): the previous trace_native_codex
-    setup kept user CODEX_HOME so preference-tracker hooks could fire,
+    setup kept user CODEX_HOME so tellonce hooks could fire,
     but `~/.codex/hooks.json` registers `userpromptsubmit-retrieve-inject.sh`
-    which loads `~/.codex/skills/preference-tracker/shared_lib/fingerprints.yaml`
+    which loads `~/.codex/skills/tellonce/shared_lib/fingerprints.yaml`
     and the user's personal memory dir — leaking ~19 external rules into
     every trace_native_codex turn regardless of B5_MEMORY_DIR. Mirrors
     the claude-side Fix 3 (drop memory-retrieve-inject.sh): runner already
@@ -473,7 +473,7 @@ def _prepare_trace_codex_home() -> Path:
       - auth.json (symlink to user's, preserves login)
       - hooks.json registering ONLY a heartbeat hook for diagnostic proof
         the codex hook chain loaded inside the isolated session
-      - NO preference-tracker skill dir (so no fingerprints.yaml exists
+      - NO tellonce skill dir (so no fingerprints.yaml exists
         even if a hook script tried to load it)
     """
     real_home = Path(os.environ.get("CODEX_HOME") or Path.home() / ".codex").expanduser()

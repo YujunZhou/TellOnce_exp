@@ -14,8 +14,8 @@
 #     condition  : trace_native_cc | trace_native_codex | no_memory | compiled_enforcement
 #
 # Prerequisites:
-#   - For trace_native_cc / trace_native_codex: install the preference-tracker
-#     skill at ~/.claude/skills/preference-tracker (see https://github.com/YujunZhou/preference-tracker).
+#   - For trace_native_cc / trace_native_codex: install the tellonce
+#     skill at ~/.claude/skills/tellonce (see https://github.com/YujunZhou/tellonce).
 #   - Download the ClawArena benchmark and point CLAWARENA_ROOT at it
 #     (see ../data/README.md).
 set -euo pipefail
