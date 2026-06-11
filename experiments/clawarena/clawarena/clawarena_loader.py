@@ -1,0 +1,56 @@
+"""Load ClawArena scenario data from a checked-out repository."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from .schema import MULTI_CHOICE, EXEC_CHECK, Round, Scenario
+
+
+def load_scenario(clawarena_root: str | Path, scenario_id: str) -> Scenario:
+    root = Path(clawarena_root)
+    q_path = root / "data" / "clawarena" / "eval" / scenario_id / "questions.json"
+    if not q_path.is_file():
+        raise FileNotFoundError(f"ClawArena questions.json not found: {q_path}")
+    data = json.loads(q_path.read_text(encoding="utf-8"))
+    raw_rounds = data.get("rounds")
+    if not isinstance(raw_rounds, list) or not raw_rounds:
+        raise ValueError(f"scenario {scenario_id} has no rounds")
+
+    rounds: list[Round] = []
+    for idx, item in enumerate(raw_rounds):
+        if not isinstance(item, dict):
+            raise ValueError(f"round {idx} is not an object")
+        round_id = str(item.get("id") or "").strip()
+        round_type = str(item.get("type") or item.get("question_type") or "").strip()
+        question = str(item.get("question") or "").strip()
+        if not round_id:
+            raise ValueError(f"round {idx} missing id")
+        if round_type not in {MULTI_CHOICE, EXEC_CHECK}:
+            raise ValueError(f"round {round_id} has unsupported type {round_type!r}")
+        if not question:
+            raise ValueError(f"round {round_id} missing question")
+        eval_spec = item.get("eval") or {}
+        if round_type == MULTI_CHOICE:
+            if not isinstance(eval_spec, dict) or not eval_spec.get("answer"):
+                raise ValueError(f"multi_choice round {round_id} missing eval.answer")
+        rounds.append(
+            Round(
+                round_id=round_id,
+                round_index=idx,
+                round_type=round_type,
+                question=question,
+                eval_spec=eval_spec if isinstance(eval_spec, dict) else {},
+                pref_spec=item.get("pref") if isinstance(item.get("pref"), dict) else {},
+                feedback=item.get("feedback") if isinstance(item.get("feedback"), dict) else {},
+                update_ids=[
+                    str(x) for x in item.get("update_ids", []) if str(x).strip()
+                ],
+                raw=item,
+            )
+        )
+    return Scenario(
+        scenario_id=str(data.get("id") or scenario_id),
+        description=str(data.get("desc") or ""),
+        rounds=rounds,
+    )
