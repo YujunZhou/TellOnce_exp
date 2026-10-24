@@ -1,0 +1,337 @@
+{
+  "benchmark": "clawarena",
+  "test_task_workers": 4,
+  "spec": {
+    "schema": 1,
+    "run_id": "tellonce-clawarena-sol-user_a",
+    "user_id": "user_a",
+    "method": "trace",
+    "models": {
+      "roles": {
+        "appeal": {
+          "config": {
+            "input_max_bytes": 786432,
+            "max_tokens": 8192,
+            "model": "google/gemma-4-31b-it",
+            "openrouter_upstream": null,
+            "provider": "openrouter",
+            "reasoning_effort": "none",
+            "temperature": 0.0
+          },
+          "kind": "openrouter",
+          "timeout_s": 180
+        },
+        "execution_check": {
+          "config": {
+            "max_tokens": 8192,
+            "model": "deepseek/deepseek-v4.1-flash",
+            "openrouter_upstream": "low-cost-auto",
+            "provider": "openrouter",
+            "reasoning_effort": "low"
+          },
+          "kind": "openrouter",
+          "timeout_s": 180
+        },
+        "feedback": {
+          "config": {
+            "input_max_bytes": 786432,
+            "max_tokens": 1536,
+            "model": "google/gemma-4-31b-it",
+            "openrouter_upstream": null,
+            "provider": "openrouter",
+            "reasoning_effort": "none",
+            "temperature": 0.3
+          },
+          "kind": "openrouter",
+          "timeout_s": 180
+        },
+        "memory": {
+          "config": {
+            "input_max_bytes": 786432,
+            "max_tokens": 8192,
+            "model": "google/gemma-4-31b-it",
+            "openrouter_upstream": null,
+            "provider": "openrouter",
+            "reasoning_effort": "none",
+            "temperature": 0.0
+          },
+          "kind": "openrouter",
+          "timeout_s": 180
+        },
+        "preference": {
+          "config": {
+            "input_max_bytes": 786432,
+            "max_tokens": 6000,
+            "model": "google/gemma-4-31b-it",
+            "openrouter_upstream": null,
+            "provider": "openrouter",
+            "reasoning_effort": "none",
+            "temperature": 0.0
+          },
+          "kind": "openrouter",
+          "timeout_s": 180
+        }
+      },
+      "solver": {
+        "context_window": 872000,
+        "input_max_bytes": 786432,
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "low",
+        "stream_idle_timeout_ms": 120000
+      }
+    },
+    "directory": "/ABS/PATH/TO/set-by-run_trace",
+    "dataset_root": "/ABS/PATH/TO/ClawArena",
+    "dataset_revision": "146bf9a952a9833fa949061aa93ec7eaa3a05ce0",
+    "tasks": [
+      {
+        "asset_digest": "ea0effee349e643fa01d925e4a9cafbbe8d8f1e15cbb3e68bdd81ac7e7451a26",
+        "evaluation_digest": "4f29be930e125a402bf024aaba871cd46752cc5bca33ba6edda2e33bd96af4b8",
+        "family": "native_prefix_c",
+        "scenario_id": "hil_c4",
+        "seed": 0,
+        "split": "acquisition",
+        "units_hash": "bdc245abb0641299e2546242a73e4011756a634d7b6976dbb0b66cb270138db1"
+      },
+      {
+        "asset_digest": "b63f140bb119f0facfd5ac0c85f7667acbbdb8ae7db3efa549e6c69ba28d5600",
+        "evaluation_digest": "5feefd925ce9912cb8aa0960d67626cfadfafc8ea386ef33a733a9eb212a9623",
+        "family": "native_prefix_c",
+        "scenario_id": "hil_c3",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "5735646437d14cd11f575051af84f1e3b137855c27820ccd238831ce791f47da"
+      },
+      {
+        "asset_digest": "1ceb8af0e3ad31f652cdab1e946e3abf8a94fdd72a3845ec4752e64cf674b68f",
+        "evaluation_digest": "c801cd769f8a0377c96b14171a50b560c8a56e296cd6d0cc76a90b4d58341f19",
+        "family": "native_prefix_c",
+        "scenario_id": "hil_c1",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "6824cb18063410643e3683aa1631b51eb811ed2e89920ba64fab5c8155c41a8b"
+      },
+      {
+        "asset_digest": "487352b6cae2992d642cdedc55138f9178d6b8419e2a27b3929e131c905f6c38",
+        "evaluation_digest": "9355b830f929b5ed358f029e77e53672da603eb03cb0bcc5e9e588206ae5486b",
+        "family": "native_prefix_d",
+        "scenario_id": "hil_d5",
+        "seed": 0,
+        "split": "acquisition",
+        "units_hash": "300769c63dd92fa384a88770887cb95762a3a29307aad6a444affb8125fe885c"
+      },
+      {
+        "asset_digest": "7a42743349d68380327ab89cb8e2cb14bea2380aa11d2e24246a20a4d4845c6e",
+        "evaluation_digest": "c09425016c461babbbd631b1f35edcb64214cc8ccabebf91bb728e472db9a36c",
+        "family": "native_prefix_d",
+        "scenario_id": "hil_d6",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "4dec1959f829ae25570a60e7d9d5ed11d16be25dd20eb099a5ee0fc7de0082b3"
+      },
+      {
+        "asset_digest": "5935ea7e36f772917e5f1e6e822308a0ae56a35afb92aa014d6d0459ca6711cc",
+        "evaluation_digest": "63fccde9b9e23ddd5cce00bdfae007e8b12168c2d369eb3c8b8b5372cbbb6bd3",
+        "family": "native_prefix_d",
+        "scenario_id": "hil_d8",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "01195f1f40ef6d81f5c6d459d7f077e8cd12953b26c1ae48841d11cf9a88f6ae"
+      },
+      {
+        "asset_digest": "6abfbdd10f95ff13b91a430b63e7e61771c65482d18c3a5af483dd9e37d69dc4",
+        "evaluation_digest": "459c086aebbfe847a628d7c46c3cff021e542cf2d10438ebb59a3e0c619d3b76",
+        "family": "native_prefix_e",
+        "scenario_id": "hil_e8",
+        "seed": 0,
+        "split": "acquisition",
+        "units_hash": "a0de1b457812aabca1152229686f7a4a66bcba05235c048c241b065130fc1205"
+      },
+      {
+        "asset_digest": "211bc3050500e778682e40d91596a8e6619b80ca334aa6769d0604807d4ddb4c",
+        "evaluation_digest": "a539c5b71082182d0a17aa3d2b146bd9caa925a3008db5f30fe7146f3aba23da",
+        "family": "native_prefix_e",
+        "scenario_id": "hil_e2",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "f7b67d5e5245a95a7e1094923e28c33e6ceb2457a4334d0c22d458612fed1090"
+      },
+      {
+        "asset_digest": "f99a7c209a2ca2c55ed9a2e69e62171fac528f35381b99630f6156dec625eaf0",
+        "evaluation_digest": "38ddc6cee7794b6ee6bbd4dfb0f971f1a2b768774ac155b1bf406218de1405e1",
+        "family": "native_prefix_e",
+        "scenario_id": "hil_e1",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "84306ddacd91d7ce5a165097d76d6a3e7314f6dcbb50f9b82131893f9a891f20"
+      },
+      {
+        "asset_digest": "b40af44a964d1f873aecc5a3bf400a440ef447f0902de39f62b8063bec68eeb0",
+        "evaluation_digest": "c3342906e754084b8cefc19a3896d6257f31da78169df31ed506404ccd3c2d83",
+        "family": "native_prefix_f",
+        "scenario_id": "hil_f4",
+        "seed": 0,
+        "split": "acquisition",
+        "units_hash": "29938e32ce4f4936ff5a3723116bc546b81da7cba397736139497c9e260b10fb"
+      },
+      {
+        "asset_digest": "d44566d0acdc28515ca09c174ae46616fce4cf21fba1198ef0b0edadcd866ce0",
+        "evaluation_digest": "3e1fb74aa0a79025628b860c49339021cc6e2c32fc30a9b2397cc7b9f9f2a354",
+        "family": "native_prefix_f",
+        "scenario_id": "hil_f7",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "7b41b5006e5abe03482fa0484366388e22bed14e69b41b50bebeb5b17dc384b1"
+      },
+      {
+        "asset_digest": "4eed8b090794d45b238c67c4f03f09cbb158f24d3b3e8e7f185b113a076fc23f",
+        "evaluation_digest": "59526c2ea6ed0cbb204443fc6e5f8e1c5833963860a78485278fc62591cccec8",
+        "family": "native_prefix_f",
+        "scenario_id": "hil_f1",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "49d7db9dba67b14dbdf7345fa2f9eb5328a2f94b771e26aeca69dfe56d46b0c8"
+      },
+      {
+        "asset_digest": "6bc4cb58111813daad9f1b74292fbdd605c7c909b37aa2d18e501feb3207158c",
+        "evaluation_digest": "fe734cb964cc9af10ea62d3a98e2770d79a96fe571ce50aebc241379e6d0d869",
+        "family": "native_prefix_g",
+        "scenario_id": "hil_g2",
+        "seed": 0,
+        "split": "acquisition",
+        "units_hash": "39823a313b9ee754c894d76311bad3caae2035a2a93e6588bd460770d3a8c49c"
+      },
+      {
+        "asset_digest": "426569c5d3ac419f2f059b7516e393e8b3f6c382f1c41711a50488fa5a8d90c8",
+        "evaluation_digest": "f023f181abc16cac6d6a1d32f66a72c14f6ab95cb7655a2b40202c54370e9a4e",
+        "family": "native_prefix_g",
+        "scenario_id": "hil_g6",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "e607d8701b823fc61657ab7734bd79dc375f84a72cc6f2535f6288aaaa076e52"
+      },
+      {
+        "asset_digest": "7e7c86e4b280cd30c4d4fad20b1efcec3000fd65f54b3bdb310bd1341f197f37",
+        "evaluation_digest": "57e14d61223e96176f41330bf188146f73b08d4191549f3877fedefa55f89d4e",
+        "family": "native_prefix_g",
+        "scenario_id": "hil_g1",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "0c23ab5352f71a422d8e43df2f95c9e05f51541065e4829cd0d00a8bc24e4212"
+      },
+      {
+        "asset_digest": "74fabaccd821a9a638f19f7aec0a5c7d2533a5d4c97af2baaec851e9a9a884dc",
+        "evaluation_digest": "49256708690feeab1417df5c8abe5bfa44c2278c5440814d0e1f19bdba9afc24",
+        "family": "native_prefix_h",
+        "scenario_id": "hil_h5",
+        "seed": 0,
+        "split": "acquisition",
+        "units_hash": "c342f2a889035ba2de892093eb3f7f59cc14c316a4c9c2c55a014d2a959d8f96"
+      },
+      {
+        "asset_digest": "9d0da314f5f495a8798ad1a0a592fb90de0bc2295003182e669abe5f0b371c1a",
+        "evaluation_digest": "c072cc09bcb68c13f8da3ac8c2951961df6a71cb6ac0a95b47c530e1cb4d58e7",
+        "family": "native_prefix_h",
+        "scenario_id": "hil_h1",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "b31f3565824e4960c42f60ef961ee4869bed5ceeaaeeba0937a7a5a4c5338f65"
+      },
+      {
+        "asset_digest": "7435b190cb6084cb9441cb345d306261292ba04f5fee57e1ffd133e9806ade1f",
+        "evaluation_digest": "3d45f18cfc7e3dbc575dd3e53648bfab2a8004a0c08949def3cdc88a8c37a5ae",
+        "family": "native_prefix_h",
+        "scenario_id": "hil_h3",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "d2813133acd5aae2e816c41cc1b93ade4bb9800d3001585bdf09ed080e62c8cc"
+      },
+      {
+        "asset_digest": "ff70c5a769f82451171c468cef7a5eb89ddb9906d58688fb2b00ea5f745ab4a6",
+        "evaluation_digest": "37b2f80950d7e5e64b5bf424872174c37179b0e30e7ffb6641aea4e26a5641a5",
+        "family": "native_prefix_i",
+        "scenario_id": "hil_i3",
+        "seed": 0,
+        "split": "acquisition",
+        "units_hash": "48060d7ed721c32d0e325e617c71779b642572466ba85bb4916c7603a2e1c44d"
+      },
+      {
+        "asset_digest": "e8e2af8491eca74539cba1a8133737fa8c3a1ba208664eb9519f82a3be0f84e1",
+        "evaluation_digest": "c5a61e308ccd55a167171441e47b407ee13bb0ba63ee81aab2d281416c657bb9",
+        "family": "native_prefix_i",
+        "scenario_id": "hil_i7",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "8bb1bf57b9876b92b9531ed87f26b2066725c8bea9a7488ef9ed7c4de651723c"
+      },
+      {
+        "asset_digest": "a02b6bdf3a07ac407189f74808de7e18a5a3763d3c60b80121c3ce3cbe1e20f0",
+        "evaluation_digest": "13d81271058fd6dd6c2f390658e15e2158d8e523f82abcff7b496bd605858c7c",
+        "family": "native_prefix_i",
+        "scenario_id": "hil_i6",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "c4be6994634ec46cf6855f2ede3fc3b6d5334563b86df94932241b4e33e0d227"
+      },
+      {
+        "asset_digest": "50e5d9ece34e8c1486b70af94e1ebc2c7bb8684f9f25d099198f9fe1237463a0",
+        "evaluation_digest": "e83a929cd5845679bd0b9eb3f426d187c18d09ff40d57f4bd14ae53722fc8677",
+        "family": "native_prefix_j",
+        "scenario_id": "hil_j4",
+        "seed": 0,
+        "split": "acquisition",
+        "units_hash": "6f6ed7ca047fd603bd547f4b6ad7c1c7337dd2f15843ab2f44f4ae822879994d"
+      },
+      {
+        "asset_digest": "f459b2e3ef2f886b0f698996fc71989939f8973f38c48525aafe2dca97e4a4f6",
+        "evaluation_digest": "dd6c7c576d74e6fb8ffa3c1860557362587ce5c5040a16ccb8a8b44e52d419ed",
+        "family": "native_prefix_j",
+        "scenario_id": "hil_j7",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "5889793e58ec10e686a37882642229cfd19119a94d70702e229807173372570f"
+      },
+      {
+        "asset_digest": "9f8d3e03a00d79469fa6c74cdb5cb1f5a68fa596c634b83683518d0aba6b3ef3",
+        "evaluation_digest": "0a95152e16bdd9ce71439043e1a8b59257ea53dea0b061e1352d4d94e5527d20",
+        "family": "native_prefix_j",
+        "scenario_id": "hil_j6",
+        "seed": 0,
+        "split": "id_test",
+        "units_hash": "357bc4d6f8f8ce793beca7e7eac6022efd48bd8e028636f95006dc830db768fa"
+      }
+    ],
+    "binary": "/ABS/PATH/TO/codex-0.153.4/bin/codex",
+    "catalog": {
+      "path": "/ABS/PATH/TO/REPO/experiments/configs/codex-models-0.153.4.json",
+      "sha256": "d7136a413cfac1b5b1686d9e0dcc5c80ca05bebed5e9fc3911376561d0ef6ee8"
+    },
+    "tokenizer": "/ABS/PATH/TO/gemma4-tokenizer",
+    "auth_home": "/ABS/PATH/TO/HOME/.codex",
+    "api_key_file": "/ABS/PATH/TO/.env",
+    "compiler_id": "openrouter:google/gemma-4-31b-it:reasoning-none",
+    "task_timeout_s": 900,
+    "role_deadline_s": 1800,
+    "execution_enabled": true,
+    "score_before_repair": true,
+    "python": "/ABS/PATH/TO/bench-venv/bin/python",
+    "python_roots": [
+      "/ABS/PATH/TO/bench-venv"
+    ],
+    "phase_timeout_s": 86400,
+    "runtime": {
+      "api_luna_roles": {
+        "max_tokens": 16384,
+        "model": "gpt-6-luna",
+        "policy": "api-luna-low-v1",
+        "provider": "openai",
+        "reasoning_effort": "low",
+        "schema": 1,
+        "selector_reasoning_effort": "medium",
+        "slot_count": 16,
+        "slot_directory": "/ABS/PATH/TO/api-role-slots"
+      },
+      "task_timeout_s_override": 3600
+    }
+  }
+}
